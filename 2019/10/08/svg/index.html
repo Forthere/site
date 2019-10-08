@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>svg | 一个神奇的网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Forthere Blog">
+  
+  <meta name="description" content="VUE-CLI3.0配置自动化svg编写原因项目使用的是阿里巴巴矢量图标库iconfont, 使用的是Font class模式, 由于项目迭代，管理不严格。 出现了新增新图标异常麻烦, 需要新建一个新建的font文件夹, 还存在字体冲突的原因。 参考文档vue-cli3.0vue-admin-templaterequire.contextsvg-sprite-loader 版本相关,安装依赖vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="svg">
+<meta property="og:url" content="https://github.com/Forthere/2019/10/08/svg/index.html">
+<meta property="og:site_name" content="一个神奇的网站">
+<meta property="og:description" content="VUE-CLI3.0配置自动化svg编写原因项目使用的是阿里巴巴矢量图标库iconfont, 使用的是Font class模式, 由于项目迭代，管理不严格。 出现了新增新图标异常麻烦, 需要新建一个新建的font文件夹, 还存在字体冲突的原因。 参考文档vue-cli3.0vue-admin-templaterequire.contextsvg-sprite-loader 版本相关,安装依赖vue">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-08T10:03:26.957Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="svg">
+<meta name="twitter:description" content="VUE-CLI3.0配置自动化svg编写原因项目使用的是阿里巴巴矢量图标库iconfont, 使用的是Font class模式, 由于项目迭代，管理不严格。 出现了新增新图标异常麻烦, 需要新建一个新建的font文件夹, 还存在字体冲突的原因。 参考文档vue-cli3.0vue-admin-templaterequire.contextsvg-sprite-loader 版本相关,安装依赖vue">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/site/css/style.css">
+  <script src="/site/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/site/" class="left">
+                    <span class="site-title">Forthere&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/site/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/site/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>文档</span>
+                    </a>
+                    
+                    <a  href="/site/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/site/">
+                    <img src="/site/images/logo.jpg" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Forthere&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个三天打鱼二天晒网的博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Forthere">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-svg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      svg
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-10-08
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="VUE-CLI3-0配置自动化svg"><a href="#VUE-CLI3-0配置自动化svg" class="headerlink" title="VUE-CLI3.0配置自动化svg"></a>VUE-CLI3.0配置自动化svg</h2><h3 id="编写原因"><a href="#编写原因" class="headerlink" title="编写原因"></a>编写原因</h3><p>项目使用的是<code>阿里巴巴矢量图标库</code><a href="https://www.iconfont.cn/home/index?spm=a313x.7781069.1998910419.2" target="_blank" rel="noopener">iconfont</a>, 使用的是Font class模式, 由于项目迭代，管理不严格。 出现了新增新图标异常麻烦, 需要新建一个新建的font文件夹, 还存在字体冲突的原因。</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://cli.vuejs.org/zh/guide/html-and-static-assets.html#从相对路径导入" target="_blank" rel="noopener">vue-cli3.0</a><br><a href="https://github.com/PanJiaChen/vue-admin-template">vue-admin-template</a><br><a href="https://www.jianshu.com/p/c894ea00dfec" target="_blank" rel="noopener">require.context</a><br><a href="https://github.com/kisenka/svg-sprite-loader">svg-sprite-loader</a></p>
+<h3 id="版本相关-安装依赖"><a href="#版本相关-安装依赖" class="headerlink" title="版本相关,安装依赖"></a>版本相关,安装依赖</h3><p>vue v2.6.10<br>vue-cli v3.11<br>node v10.16.0<br>npm v6.9.0<br>svg-sprite-loader v4.1.6</p>
+<p><strong>创建项目</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create svg-demo</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装svg-sprite-loader</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save svg-sprite-loader</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p><strong>vue.config.js</strong><br>进入到项目svg-demo中, 创建vue.config.js文件。参考 <a href="https://cli.vuejs.org/zh/guide/html-and-static-assets.html#从相对路径导入" target="_blank" rel="noopener">vue-cli3.0</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">dir</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> path.join(__dirname, <span class="string">''</span>, dir)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	<span class="comment">//	选项</span></span><br><span class="line">	chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">const</span> svgRule = config.module.rule(<span class="string">'svg'</span>);</span><br><span class="line">		<span class="keyword">const</span> urlRule = config.module.rule(<span class="string">'url-loader'</span>)</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 清除已有的所有loader</span></span><br><span class="line">		svgRule.uses.clear();</span><br><span class="line">		urlRule.uses.clear();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 添加需要替换的loader</span></span><br><span class="line">		svgRule</span><br><span class="line">			.test(<span class="regexp">/\.svg$/</span>)</span><br><span class="line">			.use(<span class="string">'svg-sprite-loader'</span>)</span><br><span class="line">			.loader(<span class="string">'svg-sprite-loader'</span>)</span><br><span class="line">			.options(&#123;</span><br><span class="line">				symbolId: <span class="string">'icon-[name]'</span></span><br><span class="line">			&#125;)</span><br><span class="line">			.end()</span><br><span class="line">			.include</span><br><span class="line">			.add(resolve(<span class="string">'src/icons'</span>))</span><br><span class="line">			.end()</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 其他的svg使用url-loader</span></span><br><span class="line">		urlRule</span><br><span class="line">			.test(<span class="regexp">/\.svg$/</span>)</span><br><span class="line">			.use(<span class="string">'url-loader'</span>)</span><br><span class="line">			.loader(<span class="string">'url-loader'</span>)</span><br><span class="line">			.options(&#123;</span><br><span class="line">				limit: <span class="number">10000</span></span><br><span class="line">			&#125;)</span><br><span class="line">			.end()</span><br><span class="line">			.exclude</span><br><span class="line">			.add(resolve(<span class="string">'src/icons'</span>))</span><br><span class="line">			.end()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>组件</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;svg :<span class="class"><span class="keyword">class</span></span>=<span class="string">"className"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"svg-icon"</span> aria-hidden=<span class="string">"true"</span>&gt;</span><br><span class="line">    &lt;use :xlink:href=<span class="string">"iconName"</span> /&gt;</span><br><span class="line">  &lt;<span class="regexp">/svg&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"svg-icon"</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    name: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      required: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    className: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      <span class="keyword">default</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    iconName() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`#icon-<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>自动化导入</strong></p>
+<blockquote>
+<p>icons (文件夹)</p>
+<blockquote>
+<p>index.js<br>svg (文件夹存放svg)</p>
+</blockquote>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> SvgIcon <span class="keyword">from</span> <span class="string">'@/components/SvgIcon'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册全局组件</span></span><br><span class="line">Vue.component(<span class="string">'svg-icon'</span>, SvgIcon)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给svg下面的文件夹批量导入</span></span><br><span class="line"><span class="keyword">const</span> requireAll = <span class="function"><span class="params">requireContext</span> =&gt;</span> requireContext.keys().map(requireContext)</span><br><span class="line"><span class="keyword">const</span> req = <span class="built_in">require</span>.context(<span class="string">'./svg'</span>, <span class="literal">false</span>, /\.svg$/)</span><br><span class="line">requireAll(req)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注入</strong><br>在<code>main.js</code>加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &apos;@/icons&apos;</span><br></pre></td></tr></table></figure>
+
+<p><strong>调用</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg-icon</span> <span class="attr">name</span>=<span class="string">"facebook"</span>&gt;</span><span class="tag">&lt;/<span class="name">svg-icon</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
+<li>在<code>vue.config.js</code>中, <code>include, exclude</code>添加文件路径出问题. 原因是由于<code>path.join(__dirname, &#39;&#39;, dir)</code>路径的拼合错误. 在<code>vue-admin-template</code>是<code>path.join(__dirname, &#39;__&#39;, dir)</code>导致loader也解析不了svg</li>
+<li>有点不理解<code>index.js</code>中的<code>require.context</code>, 通过参考文档原来是webpack提供的一个api,批量导入文件夹中的文件</li>
+</ol>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年10月08日 18:03</p>
+        <p>原始链接： <a class="post-url" href="/site/2019/10/08/svg/" title="svg">https://github.com/Forthere/2019/10/08/svg/</a></p>
+        <footer>
+            <a href="https://github.com/Forthere">
+                <img src="/site/images/logo.jpg" alt="Forthere">
+                Forthere
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/site/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/site/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/site/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/site/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/site/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/Forthere/2019/10/08/svg/&title=《svg》 — 一个神奇的网站&pic=https://github.com/Forthereimages/logo.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Forthere/2019/10/08/svg/&title=《svg》 — 一个神奇的网站&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Forthere/2019/10/08/svg/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《svg》 — 一个神奇的网站&url=https://github.com/Forthere/2019/10/08/svg/&via=https://github.com/Forthere" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/Forthere/2019/10/08/svg/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/Forthere/2019/10/08/svg/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#VUE-CLI3-0配置自动化svg"><span class="post-toc-text">VUE-CLI3.0配置自动化svg</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编写原因"><span class="post-toc-text">编写原因</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考文档"><span class="post-toc-text">参考文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#版本相关-安装依赖"><span class="post-toc-text">版本相关,安装依赖</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-text">遇到的问题</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/site/2019/09/27/函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">函数</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Forthere<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://github.com/Forthere",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+	<div id="sidebar-search" title="Search">
+		<i class="fa fa-search"></i>
+	</div>
+	<!-- <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div> -->
+	<div id="sidebar-tag" title="Tags">
+		<i class="fa fa-tags"></i>
+	</div>
+	<div id="sidebar-top">
+		<span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+	</div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+	<div class="sidebar-menu-box-container">
+		<div id="sidebar-menu-box-categories">
+			
+		</div>
+		<div id="sidebar-menu-box-tags">
+			<a href="/site/tags/JavaScript/" style="font-size: 10px;">JavaScript</a>
+		</div>
+	</div>
+	<a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/site/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/site/archives">
+                    <i class="fa fa-archive"></i><span>文档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/site/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/site/tags/JavaScript/" style="font-size: 10px;">JavaScript</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/site/js/search.js"></script>
+<script src="/site/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/site/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/site/js/animate.js"></script>
+
+
+  <script src="/site/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
