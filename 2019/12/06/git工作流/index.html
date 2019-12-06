@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>git工作流 | 一个神奇的网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Forthere Blog">
+  
+  <meta name="description" content="目的看了文章之后, 自己写一下加深印象。 感受文章主要是通过指定分支规则来实现工作流 master分支主干，不做任何代码操作, 只合并dev分支或者Hotfix分支上面的代码, 每一次提交做一个tag。 Hotfix线上系统出现bug紧急修复。 修复完成之后合并到master和dev分支中 dev 分支开发主干, 不做任何代码操作， 合并rebase分支或者feature分支或者Hotfix上面的">
+<meta name="keywords" content="git flow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git工作流">
+<meta property="og:url" content="https://github.com/Forthere/2019/12/06/git工作流/index.html">
+<meta property="og:site_name" content="一个神奇的网站">
+<meta property="og:description" content="目的看了文章之后, 自己写一下加深印象。 感受文章主要是通过指定分支规则来实现工作流 master分支主干，不做任何代码操作, 只合并dev分支或者Hotfix分支上面的代码, 每一次提交做一个tag。 Hotfix线上系统出现bug紧急修复。 修复完成之后合并到master和dev分支中 dev 分支开发主干, 不做任何代码操作， 合并rebase分支或者feature分支或者Hotfix上面的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-06T08:26:38.868Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git工作流">
+<meta name="twitter:description" content="目的看了文章之后, 自己写一下加深印象。 感受文章主要是通过指定分支规则来实现工作流 master分支主干，不做任何代码操作, 只合并dev分支或者Hotfix分支上面的代码, 每一次提交做一个tag。 Hotfix线上系统出现bug紧急修复。 修复完成之后合并到master和dev分支中 dev 分支开发主干, 不做任何代码操作， 合并rebase分支或者feature分支或者Hotfix上面的">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/site/css/style.css">
+  <script src="/site/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/site/" class="left">
+                    <span class="site-title">Forthere&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/site/">
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    
+                    <a  href="/site/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>文档</span>
+                    </a>
+                    
+                    <a  href="/site/about">
+                        <i class="fa fa-user"></i>
+                        <span>关于</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/site/">
+                    <img src="/site/images/logo.jpg" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Forthere&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个三天打鱼二天晒网的博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Github" target="_blank" href="//github.com/Forthere">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-git工作流" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      git工作流
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-12-06
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p><code>看了文章之后, 自己写一下加深印象。</code></p>
+<h3 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h3><p><code>文章主要是通过指定分支规则来实现工作流</code></p>
+<h3 id="master分支"><a href="#master分支" class="headerlink" title="master分支"></a>master分支</h3><p><code>主干，不做任何代码操作, 只合并dev分支或者Hotfix分支上面的代码, 每一次提交做一个tag。</code></p>
+<h3 id="Hotfix"><a href="#Hotfix" class="headerlink" title="Hotfix"></a>Hotfix</h3><p><code>线上系统出现bug紧急修复。 修复完成之后合并到master和dev分支中</code></p>
+<h3 id="dev-分支"><a href="#dev-分支" class="headerlink" title="dev 分支"></a>dev 分支</h3><p><code>开发主干, 不做任何代码操作， 合并rebase分支或者feature分支或者Hotfix上面的代码。 在有rebase分支的情况下, 不在做任何代码的合并操作。</code></p>
+<h3 id="feature-分支"><a href="#feature-分支" class="headerlink" title="feature 分支"></a>feature 分支</h3><p><code>开发分支, 应该每一个新需求可以开一个分支。</code></p>
+<h3 id="release-分支"><a href="#release-分支" class="headerlink" title="release 分支"></a>release 分支</h3><p><code>线上发布分支, 给feature分支合并到dev发布到测试环境中, 如果出现问题在release中修改。</code></p>
+<h3 id="git-flow代码示例"><a href="#git-flow代码示例" class="headerlink" title="git flow代码示例"></a>git flow代码示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"># 建立切换 dev分支</span><br><span class="line">git branch -b dev</span><br><span class="line">git push origin dev</span><br><span class="line"># 建立切换 新需求分支</span><br><span class="line">git branch -b feature dev</span><br><span class="line">git push origin feature</span><br><span class="line"># 一些改动</span><br><span class="line">git status</span><br><span class="line">git add some-file.js</span><br><span class="line">git commit -m &quot;添加一些文件&quot;</span><br><span class="line"># 完成feature --no-ff 禁止快进, 不会给feature的提交记录给带入合并的分支</span><br><span class="line">git push origin dev</span><br><span class="line">git checkout dev</span><br><span class="line">git merge --no-ff feature</span><br><span class="line">git push origin dev</span><br><span class="line">git branch -d feature</span><br><span class="line"># 开始 release</span><br><span class="line">git branch -b release-0.0.1 dev</span><br><span class="line"># 一些改动</span><br><span class="line">git status</span><br><span class="line">git add some-file.js</span><br><span class="line">git commit -m &quot;修复some-file&quot;</span><br><span class="line">git push origin release-0.0.1</span><br><span class="line"># 完成 release</span><br><span class="line">git checkout -b dev</span><br><span class="line">git merge --no-ff release-0.0.1</span><br><span class="line">git push origin dev</span><br><span class="line"></span><br><span class="line">git checkout -b master</span><br><span class="line">git merge --no-ff release-0.0.1</span><br><span class="line">git push origin master</span><br><span class="line"></span><br><span class="line">git branch -d release-0.0.1</span><br><span class="line">git push origin --delete release-0.0.1</span><br><span class="line"></span><br><span class="line">git tag -a v0.1.0 master</span><br><span class="line">git push --tags</span><br><span class="line"># 开始hotfix</span><br><span class="line">git checkout -b hotfix-0.0.1 master</span><br><span class="line"># 一些改动</span><br><span class="line">git add some-file</span><br><span class="line">git commit -m &quot;修复some-file&quot;</span><br><span class="line">git push origin hotfix-0.0.1</span><br><span class="line"># 完成hotfix</span><br><span class="line">git checkout master</span><br><span class="line">git merge --no-ff hoxfix-0.0.1</span><br><span class="line">git push origin master</span><br><span class="line"></span><br><span class="line">git checkout dev</span><br><span class="line">git merge --no-ff hoxfix-0.0.1</span><br><span class="line">git push origin dev</span><br><span class="line"></span><br><span class="line">git branch -d hoxfix-0.0.1</span><br><span class="line">git push origin --delete hoxfix-0.0.1</span><br><span class="line"></span><br><span class="line">git tag -a v0.1.1 master</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.cnblogs.com/wish123/p/9785101.html" target="_blank" rel="noopener"><strong>参考文档</strong></a></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年12月06日 16:26</p>
+        <p>原始链接： <a class="post-url" href="/site/2019/12/06/git工作流/" title="git工作流">https://github.com/Forthere/2019/12/06/git工作流/</a></p>
+        <footer>
+            <a href="https://github.com/Forthere">
+                <img src="/site/images/logo.jpg" alt="Forthere">
+                Forthere
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/site/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/site/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/site/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/site/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/site/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/Forthere/2019/12/06/git工作流/&title=《git工作流》 — 一个神奇的网站&pic=https://github.com/Forthereimages/logo.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Forthere/2019/12/06/git工作流/&title=《git工作流》 — 一个神奇的网站&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Forthere/2019/12/06/git工作流/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git工作流》 — 一个神奇的网站&url=https://github.com/Forthere/2019/12/06/git工作流/&via=https://github.com/Forthere" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/Forthere/2019/12/06/git工作流/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://github.com/Forthere/2019/12/06/git工作流/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/site/tags/gitflow/" class="color4">git flow</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目的"><span class="post-toc-text">目的</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#感受"><span class="post-toc-text">感受</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#master分支"><span class="post-toc-text">master分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hotfix"><span class="post-toc-text">Hotfix</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dev-分支"><span class="post-toc-text">dev 分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#feature-分支"><span class="post-toc-text">feature 分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#release-分支"><span class="post-toc-text">release 分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-flow代码示例"><span class="post-toc-text">git flow代码示例</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/site/2019/10/08/svg/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">svg</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 Forthere<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://github.com/Forthere",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+	<div id="sidebar-search" title="Search">
+		<i class="fa fa-search"></i>
+	</div>
+	<!-- <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div> -->
+	<div id="sidebar-tag" title="Tags">
+		<i class="fa fa-tags"></i>
+	</div>
+	<div id="sidebar-top">
+		<span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+	</div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+	<div class="sidebar-menu-box-container">
+		<div id="sidebar-menu-box-categories">
+			
+		</div>
+		<div id="sidebar-menu-box-tags">
+			<a href="/site/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/site/tags/git-flow/" style="font-size: 10px;">git flow</a>
+		</div>
+	</div>
+	<a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/site/">
+                    <i class="fa fa-home"></i><span>首页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/site/archives">
+                    <i class="fa fa-archive"></i><span>文档</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/site/about">
+                    <i class="fa fa-user"></i><span>关于</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/site/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/site/tags/git-flow/" style="font-size: 10px;">git flow</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/site/js/search.js"></script>
+<script src="/site/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/site/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/site/js/animate.js"></script>
+
+
+  <script src="/site/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
